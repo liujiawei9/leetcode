@@ -24,17 +24,36 @@ public class MoveZeroes283 {
         int[] nums4 = {0, 1, 1, 0, 2, 12, 1};
         int[] nums5 = {1, 0, 92, 7, 0, 0, 3, 4};
 
-        new MoveZeroes283().moveZeroes1(nums1);
-        new MoveZeroes283().moveZeroes1(nums2);
-        new MoveZeroes283().moveZeroes1(nums3);
-        new MoveZeroes283().moveZeroes1(nums4);
-        new MoveZeroes283().moveZeroes1(nums5);
+        new MoveZeroes283().moveZeroes2(nums1);
+        new MoveZeroes283().moveZeroes2(nums2);
+        new MoveZeroes283().moveZeroes2(nums3);
+        new MoveZeroes283().moveZeroes2(nums4);
+        new MoveZeroes283().moveZeroes2(nums5);
 
         System.out.println(Arrays.toString(nums1));
         System.out.println(Arrays.toString(nums2));
         System.out.println(Arrays.toString(nums3));
         System.out.println(Arrays.toString(nums4));
         System.out.println(Arrays.toString(nums5));
+    }
+
+    /**
+     * moveZeroes1 简化
+     *
+     * @param nums
+     */
+    public void moveZeroes2(int[] nums) {
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                if (nums[j] == 0) {
+                    nums[j++] = nums[i];
+                    nums[i] = 0;
+                } else {
+                    j++;
+                }
+            }
+        }
     }
 
 
