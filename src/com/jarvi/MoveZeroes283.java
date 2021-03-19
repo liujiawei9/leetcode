@@ -47,11 +47,10 @@ public class MoveZeroes283 {
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] != 0) {
                 if (nums[j] == 0) {
-                    nums[j++] = nums[i];
+                    nums[j] = nums[i];
                     nums[i] = 0;
-                } else {
-                    j++;
                 }
+                j++;
             }
         }
     }
@@ -74,7 +73,7 @@ public class MoveZeroes283 {
      * 情况 4：nums[i] == 0 && nums[j] == 0
      * 只需要 i++，j不变
      * <p>
-     * 时间复杂度O(N)
+     * 时间复杂度O(n)
      * 空间复杂度O(1)
      *
      * @param nums 输入数组
@@ -96,7 +95,7 @@ public class MoveZeroes283 {
 
     /**
      * 冒泡法，将 0 往数组最后进行移动。效率低
-     * 时间复杂度O(N^2)
+     * 时间复杂度O(n^2)
      * 空间复杂度O(1)
      */
     public void moveZeroes(int[] nums) {
