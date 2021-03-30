@@ -24,16 +24,44 @@ package com.jarvi;
  */
 public class ClimbStairs70 {
 
-
-public int climbStairs(int n) {
-    if (n <= 0) {
-        return 0;
+    public static void main(String[] args) {
+        int n = 10;
+        System.out.println("Stairs is " + n + ", result is " + new ClimbStairs70().climbStairs2(n));
     }
-    if (n == 1 || n == 2) {
-        return n;
-    }
-    return climbStairs(n - 1) + climbStairs(n - 2);
-}
 
+    /**
+     * 斐波那契数列：
+     * 0、1、1、2、3、5、8、13、21、34
+     *
+     * @param n
+     * @return
+     */
+    public int climbStairs(int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        //把数列中相邻的三个数定义为a,b,c
+        int a = 1;
+        int b = 1;
+        for (int i = 2; i <= n; i++) {
+            int c = a + b;
+            a = b;
+            b = c;
+        }
+        return b;
+    }
+
+    public int climbStairs2(int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1 || n == 2) {
+            return n;
+        }
+        return climbStairs(n - 1) + climbStairs(n - 2);
+    }
 
 }
