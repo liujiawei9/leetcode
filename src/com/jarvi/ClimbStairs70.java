@@ -24,6 +24,7 @@ package com.jarvi;
  */
 public class ClimbStairs70 {
 
+
     public static void main(String[] args) {
         int n = 10;
         System.out.println("Stairs is " + n + ", result is " + new ClimbStairs70().climbStairs2(n));
@@ -62,6 +63,38 @@ public class ClimbStairs70 {
             return n;
         }
         return climbStairs(n - 1) + climbStairs(n - 2);
+    }
+
+    /**
+     * 动态规划
+     * n = 0 , result = 0
+     * n = 1 , result = 1
+     * n = 2 , result = 2
+     * n = 3 , result = 3
+     * 到达n级，需要从n-1级或者n-2级转移过来。
+     * 因此到达n级的方法等于到达n-1级和n-2级之和。
+     * 状态转移方程：f(n) = f(n-1) + f(n-2)
+     * @param n 台阶数
+     * @return result 方法数
+     */
+    public int dp(int n) {
+        //需要记录上两级的结果。
+        int[] dp = new int[2];
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1 || n == 2) {
+            return n;
+        }
+        int result = 0;
+        dp[0] = 1;
+        dp[1] = 2;
+        for (int i = 3; i <= n; i++) {
+            result = dp[0] + dp[1];
+            dp[0] = dp[1];
+            dp[1] = result;
+        }
+        return result;
     }
 
 }
