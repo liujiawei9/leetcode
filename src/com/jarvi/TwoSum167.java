@@ -18,12 +18,24 @@ import java.util.Arrays;
  * 示例 3：
  * 输入：numbers = [-1,0], target = -1
  * 输出：[1,2]
+ * <p>
+ * 来源：力扣（LeetCode）
+ * 链接：https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted
+ * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class TwoSum167 {
 
     public static void main(String[] args) {
-        int i = binarySearch(new int[]{2, 7, 8, 11, 15}, 15);
-        System.out.println(i);
+        int[] nums = {2, 7, 11, 15};
+        System.out.println("result : " + binarySearch(nums, 0, nums.length - 1, 2));
+        System.out.println("result : " + binarySearch(nums, 0, nums.length - 1, 7));
+        System.out.println("result : " + binarySearch(nums, 0, nums.length - 1, 11));
+        System.out.println("result : " + binarySearch(nums, 0, nums.length - 1, 15));
+        System.out.println("result : " + binarySearch(nums, 0, nums.length - 1, -5));
+        System.out.println("result : " + binarySearch(nums, 0, nums.length - 1, 8));
+        System.out.println("result : " + binarySearch(nums, 0, nums.length - 1, 20));
+        //two sum
+        System.out.println(Arrays.toString(twoSum2(nums, 17)));
     }
 
     /**
@@ -31,22 +43,24 @@ public class TwoSum167 {
      * 时间复杂度：O(nlogn)
      * 空间复杂度：O(1)
      */
-    public int[] twoSum(int[] numbers, int target) {
-        for (int i = 0; i < numbers.length; ++i) {
+    public static int[] twoSum(int[] numbers, int target) {
+        int length = numbers.length;
+        for (int i = 0; i < length; i++) {
             int low = i + 1;
-            int high = numbers.length - 1;
+            int high = length - 1;
             while (low <= high) {
-                int mid = (high - low) / 2 + low;
+                int mid = (low + high) >>> 1;
                 if (numbers[mid] == target - numbers[i]) {
                     return new int[]{i + 1, mid + 1};
-                } else if (numbers[mid] > target - numbers[i]) {
-                    high = mid - 1;
-                } else {
+                }
+                if (numbers[mid] < target - numbers[i]) {
                     low = mid + 1;
+                } else {
+                    high = mid - 1;
                 }
             }
         }
-        return new int[]{-1, -1};
+        return new int[0];
     }
 
     /**
@@ -54,7 +68,7 @@ public class TwoSum167 {
      * 时间复杂度：O(n)
      * 空间复杂度：O(1)
      */
-    public int[] twoSum2(int[] numbers, int target) {
+    public static int[] twoSum2(int[] numbers, int target) {
         int low = 0;
         int high = numbers.length - 1;
         while (low < high) {
@@ -67,34 +81,26 @@ public class TwoSum167 {
                 high--;
             }
         }
-        return new int[]{-1, -1};
+        return new int[0];
     }
 
     /**
-     * 二分查找，返回下标
-     *
-     * @param nums
-     * @param target
-     * @return
+     * 二分查找，返回目标值下标
      */
-    public static int binarySearch(int[] nums, int target) {
-        //Arrays.binarySearch(nums, target);
-        int low = 0;
-        int high = nums.length - 1;
-
-        while (low < high) {
+    //{2, 7, 11, 15}
+    public static int binarySearch(int[] nums, int low, int high, int target) {
+        while (low <= high) {
             int mid = (low + high) >>> 1;
-            int midVal = nums[mid];
-
-            if (midVal < target) {
-                low = mid + 1;
-            } else if (midVal > target) {
-                high = mid - 1;
-            } else {
+            if (nums[mid] == target) {
                 return mid;
             }
+            if (nums[mid] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
         }
-        return -(low + 1);
+        return -1;
     }
 
 }
