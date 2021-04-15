@@ -39,11 +39,40 @@ public class TwoSum167 {
     }
 
     /**
+     * 双指针 + 二分查找
+     * 时间复杂度：
+     * 空间复杂度：
+     */
+    public static int[] twoSum(int[] numbers, int target) {
+        int i = 0;
+        int j = numbers.length - 1;
+        while (i < j) {
+            int m = (i + j) >>> 1;
+            if (numbers[i] + numbers[m] > target) {
+                j = m - 1;
+                continue;
+            }
+            if (numbers[m] + numbers[j] < target) {
+                i = m + 1;
+                continue;
+            }
+            if (numbers[i] + numbers[j] == target) {
+                return new int[]{i + 1, j + 1};
+            } else if (numbers[i] + numbers[j] < target) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        return new int[]{0, 0};
+    }
+
+    /**
      * 二分查找法
      * 时间复杂度：O(nlogn)
      * 空间复杂度：O(1)
      */
-    public static int[] twoSum(int[] numbers, int target) {
+    public static int[] twoSum1(int[] numbers, int target) {
         int length = numbers.length;
         for (int i = 0; i < length; i++) {
             int low = i + 1;
