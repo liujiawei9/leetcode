@@ -51,13 +51,11 @@ public class TwoSumBST653 {
         if (node == null) {
             return false;
         }
-        if (!set.isEmpty()) {
-            if (set.contains(k - node.val)) {
-                return true;
-            }
+        if (!set.isEmpty() && set.contains(k - node.val)) {
+            return true;
         }
         set.add(node.val);
-        return find(set, node.left,k) || find(set, node.right,k);
+        return find(set, node.left, k) || find(set, node.right, k);
     }
 
 }
