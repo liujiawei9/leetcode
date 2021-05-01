@@ -27,15 +27,18 @@ public class TwoSum167 {
 
     public static void main(String[] args) {
         int[] nums = {2, 7, 11, 15};
-        System.out.println("result : " + binarySearch(nums, 0, nums.length - 1, 2));
-        System.out.println("result : " + binarySearch(nums, 0, nums.length - 1, 7));
-        System.out.println("result : " + binarySearch(nums, 0, nums.length - 1, 11));
-        System.out.println("result : " + binarySearch(nums, 0, nums.length - 1, 15));
-        System.out.println("result : " + binarySearch(nums, 0, nums.length - 1, -5));
-        System.out.println("result : " + binarySearch(nums, 0, nums.length - 1, 8));
-        System.out.println("result : " + binarySearch(nums, 0, nums.length - 1, 20));
         //two sum
-        System.out.println(Arrays.toString(twoSum2(nums, 17)));
+        System.out.println(Arrays.toString(twoSum(nums, 4)));
+        System.out.println(Arrays.toString(twoSum1(nums, 4)));
+        System.out.println(Arrays.toString(twoSum2(nums, 4)));
+        System.out.println("========================================");
+        System.out.println(Arrays.toString(twoSum(nums, 9)));
+        System.out.println(Arrays.toString(twoSum1(nums, 9)));
+        System.out.println(Arrays.toString(twoSum2(nums, 9)));
+        System.out.println("========================================");
+        System.out.println(Arrays.toString(twoSum(nums, 30)));
+        System.out.println(Arrays.toString(twoSum1(nums, 30)));
+        System.out.println(Arrays.toString(twoSum2(nums, 30)));
     }
 
     /**
@@ -64,7 +67,7 @@ public class TwoSum167 {
                 j--;
             }
         }
-        return new int[]{0, 0};
+        return new int[0];
     }
 
     /**
@@ -116,7 +119,6 @@ public class TwoSum167 {
     /**
      * 二分查找，返回目标值下标
      */
-    //{2, 7, 11, 15}
     public static int binarySearch(int[] nums, int low, int high, int target) {
         while (low <= high) {
             int mid = (low + high) >>> 1;

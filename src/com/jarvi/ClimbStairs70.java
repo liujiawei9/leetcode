@@ -27,22 +27,28 @@ public class ClimbStairs70 {
 
     public static void main(String[] args) {
         int n = 10;
-        System.out.println("Stairs is " + n + ", result is " + new ClimbStairs70().climbStairs2(n));
+        System.out.println("-5 : " + climbStairs(-5));//0
+        System.out.println("0 : " + climbStairs(0));//0
+        System.out.println("1 : " + climbStairs(1));//1
+        System.out.println("2 : " + climbStairs(2));//2
+        System.out.println("3 : " + climbStairs(3));//3
+        System.out.println("4 : " + climbStairs(4));//5
+        System.out.println("5 : " + climbStairs(5));//8
+        System.out.println("6 : " + climbStairs(6));//13
+        System.out.println("7 : " + climbStairs(7));//21
+        System.out.println("8 : " + climbStairs(8));//34
+        System.out.println("9 : " + climbStairs(9));//55
+        System.out.println("10 : " + climbStairs(10));// 89
+        System.out.println("11 : " + climbStairs(11));// 144
     }
 
     /**
      * 斐波那契数列：
      * 0、1、1、2、3、5、8、13、21、34
-     *
-     * @param n
-     * @return
      */
-    public int climbStairs(int n) {
+    public static int climbStairs(int n) {
         if (n <= 0) {
             return 0;
-        }
-        if (n == 1) {
-            return 1;
         }
         //把数列中相邻的三个数定义为a,b,c
         int a = 1;
@@ -55,7 +61,10 @@ public class ClimbStairs70 {
         return b;
     }
 
-    public int climbStairs2(int n) {
+    /**
+     * 递归
+     */
+    public static int climbStairs2(int n) {
         if (n <= 0) {
             return 0;
         }
@@ -67,34 +76,31 @@ public class ClimbStairs70 {
 
     /**
      * 动态规划
+     * 0,1,1,2,3,5,8,13
      * n = 0 , result = 0
      * n = 1 , result = 1
      * n = 2 , result = 2
      * n = 3 , result = 3
+     * n = 4 , result = 5
+     * n = 5 , result = 8
+     * n = 6 , result = 13
      * 到达n级，需要从n-1级或者n-2级转移过来。
      * 因此到达n级的方法等于到达n-1级和n-2级之和。
      * 状态转移方程：f(n) = f(n-1) + f(n-2)
      * @param n 台阶数
      * @return result 方法数
      */
-    public int dp(int n) {
-        //需要记录上两级的结果。
-        int[] dp = new int[2];
+    public static int dp(int n) {
         if (n <= 0) {
             return 0;
         }
-        if (n == 1 || n == 2) {
-            return n;
+        int[] dp = {1,1};
+        for (int i = 2; i <= n; i++) {
+            int temp = dp[1];
+            dp[1] = dp[0] + dp[1];
+            dp[0] = temp;
         }
-        int result = 0;
-        dp[0] = 1;
-        dp[1] = 2;
-        for (int i = 3; i <= n; i++) {
-            result = dp[0] + dp[1];
-            dp[0] = dp[1];
-            dp[1] = result;
-        }
-        return result;
+        return dp[1];
     }
 
 }
