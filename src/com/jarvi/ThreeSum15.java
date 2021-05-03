@@ -23,13 +23,15 @@ public class ThreeSum15 {
      * 输入例子：[-1,0,1,2,-1,-4]
      * 排序后为：[-4,-1,-1,0,1,2]
      * 正确输出：[[-1,-1,2],[-1,0,1]]
+     * 时间复杂度：O(n^2)
+     * 空间复杂度：O(n)。我们修改了输入的数组，在实际情况下不一定允许，因此也可以看成使用了一个额外的数组存储了 nums 的副本并进行排序，空间复杂度为 O(n)。
      */
     public static List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> results = new ArrayList<>();
         if (nums == null || nums.length < 3) {
             return results;
         }
-        // 排序，可以排除重复项，利用首尾指针。这里的实现时快排，时间复杂度为 O(n log(n))
+        // 排序，可以排除重复项，利用首尾指针。这里的实现是快排，快排的时间复杂度为 O(n log(n))
         Arrays.sort(nums);
         // 第一层循环，固定目标值
         for (int i = 0; i < nums.length - 2; i++) {
