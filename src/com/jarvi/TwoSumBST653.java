@@ -36,6 +36,12 @@ import java.util.Set;
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/two-sum-iv-input-is-a-bst
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ *
+ * 时间复杂度：O(n)，其中 n 是节点的数量。最坏的情况下，整棵树被遍历一次。
+ *
+ * 空间复杂度：O(n)。最坏的情况下，set 存储 n 个节点的值。
+ *
+
  */
 public class TwoSumBST653 {
 
@@ -47,15 +53,16 @@ public class TwoSumBST653 {
         return find(set, root, k);
     }
 
-    public static boolean find(Set<Integer> set, TreeNode node, int k) {
+    private static boolean find(Set<Integer> set, TreeNode node, int k) {
         if (node == null) {
             return false;
         }
-        if (!set.isEmpty() && set.contains(k - node.val)) {
+        if (set.contains(k - node.val)) {
             return true;
+        } else {
+            set.add(node.val);
+            return find(set, node.left, k) || find(set, node.right, k);
         }
-        set.add(node.val);
-        return find(set, node.left, k) || find(set, node.right, k);
     }
 
 }
