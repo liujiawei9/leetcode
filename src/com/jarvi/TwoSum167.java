@@ -43,8 +43,8 @@ public class TwoSum167 {
 
     /**
      * 双指针 + 二分查找
-     * 时间复杂度：
-     * 空间复杂度：
+     * 时间复杂度：最优 O(logn)，最差 O(n)
+     * 空间复杂度：O(1)
      */
     public static int[] twoSum(int[] numbers, int target) {
         int i = 0;
