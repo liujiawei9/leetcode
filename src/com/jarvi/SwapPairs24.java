@@ -50,13 +50,25 @@ public class SwapPairs24 {
 
     /**
      * 迭代法
+     * 时间复杂度：O(n)，其中 n 是链表的节点数量。需要对每个节点进行更新指针的操作。
+     * 空间复杂度：O(1)。
      */
     public ListNode swapPairs2(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
+        ListNode dummyHead = new ListNode();
+        dummyHead.next = head;
+        ListNode prev = dummyHead;
+        // 只有当prev指向的结点后面有两个结点时才需要交换
+        while (prev.next != null && prev.next.next != null) {
+            ListNode one = prev.next;
+            ListNode two = one.next;
+            ListNode three = two.next;
+
+            two.next = one;
+            one.next = three;
+            prev.next = two;
+            prev = one;
         }
-        //TODO
-        return head;
+        return dummyHead.next;
     }
 
 }
