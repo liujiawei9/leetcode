@@ -30,7 +30,6 @@ package com.jarvi;
  */
 public class SwapPairs24 {
 
-
     /**
      * 递归法
      * 时间复杂度：O(n)，其中 n 是链表的节点数量。需要对每个节点进行更新指针的操作。
@@ -57,15 +56,15 @@ public class SwapPairs24 {
         ListNode dummyHead = new ListNode();
         dummyHead.next = head;
         ListNode prev = dummyHead;
-        // 只有当prev指向的结点后面有两个结点时才需要交换
+        // 只有当prev指向的结点后面有两个结点或以上时才需要交换
         while (prev.next != null && prev.next.next != null) {
             ListNode one = prev.next;
             ListNode two = one.next;
             ListNode three = two.next;
-
+            //交换位置
+            prev.next = two;
             two.next = one;
             one.next = three;
-            prev.next = two;
             prev = one;
         }
         return dummyHead.next;
