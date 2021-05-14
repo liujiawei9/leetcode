@@ -46,6 +46,10 @@ package com.jarvi;
 public class ReverseKGroup25 {
 
     public ListNode reverseKGroup(ListNode head, int k) {
+        if (k <= 1) {
+            return head;
+        }
+
         //定义哨兵节点
         ListNode dummy = new ListNode(0);
         dummy.next = head;
