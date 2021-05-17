@@ -46,46 +46,50 @@ package com.jarvi;
 public class ReverseKGroup25 {
 
     public ListNode reverseKGroup(ListNode head, int k) {
-        if (k <= 1) {
+        if (k < 1) {
+            throw new IllegalArgumentException();
+        }
+        if (k == 1) {
             return head;
         }
 
         //定义哨兵节点
-        ListNode dummy = new ListNode(0);
+        ListNode dummy = new ListNode();
         dummy.next = head;
+        //前置节点
         ListNode prev = dummy;
-        ListNode end = dummy;
+        //子链表起始节点
+        ListNode start = dummy.next;
 
-        while (end.next != null) {
-            //寻找待翻转子链表的尾节点
-            for (int i = 0; i < k && end != null; i++) {
+        while (start != null) {
+            //子链表结束节点
+            ListNode end = start;
+            for (int i = 0; i < k - 1 && end != null; i++) {
                 end = end.next;
             }
-            //剩余节点数量少于 k，结束
+            //节点数不足k个，结束循环
             if (end == null) {
                 break;
             }
-            //待翻转子链表的头节点
-            ListNode start = prev.next;
-            //未翻转部分的头节点
+            //下一子链表起始节点
             ListNode next = end.next;
-            //断开待翻转子链表尾节点与后续部分的连接，方便reverse方法的终止条件判断。
+            //断开子链表与后续节点的连接，准备翻转子链表
             end.next = null;
             //翻转子链表
             reverse(start);
-            //翻转后，原尾节点变成子链表的头节点，将其与前置节点链接
+            //连接翻转后的子链表
             prev.next = end;
-            //翻转后，原头节点变成子链表的尾节点，将其与未翻转部分重新链接
             start.next = next;
-            //初始化前置节点（重置为已翻转部分的尾节点）
+            //重置前置节点
             prev = start;
-            //初始化尾节点（重置为已翻转部分的尾节点）
-            end = start;
+            //重置起始节点
+            start = next;
         }
+
         return dummy.next;
     }
 
-    private void reverse(ListNode head) {
+    public void reverse(ListNode head) {
         ListNode prev = null;
         ListNode curr = head;
         while (curr != null) {
