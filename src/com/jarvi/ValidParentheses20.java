@@ -50,8 +50,7 @@ public class ValidParentheses20 {
         if (s == null || s.length() == 0) {
             return true;
         }
-        int length = s.length();
-        if (length % 2 != 0) {
+        if (s.length() % 2 != 0) {
             return false;
         }
         Deque<Character> stack = new LinkedList<>();
