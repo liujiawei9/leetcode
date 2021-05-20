@@ -101,9 +101,8 @@ public class MaxSlidingWindow239 {
                 }
             } else {
                 // 如果最大值所在索引不在窗口范围内，那么需要重新找到索引
-                if (nums[right] >= nums[maxIndex] - 1) {
-                    maxIndex = right;
-                } else if (nums[left] >= nums[maxIndex] - 1) {
+                // 特殊处理数组为单调递减的情况
+                if (nums[left] >= nums[maxIndex] - 1) {
                     maxIndex = left;
                 } else {
                     maxIndex = getMaxIndex(nums, left, right);
