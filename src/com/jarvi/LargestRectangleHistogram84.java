@@ -51,17 +51,14 @@ public class LargestRectangleHistogram84 {
     public int largestRectangleArea2(int[] heights) {
         int maxArea = 0;
         for (int i = 0; i < heights.length; i++) {
-
             int left = i;
             while (left > 0 && heights[left - 1] >= heights[i]) {
                 left--;
             }
-
             int right = i;
             while (right < heights.length && heights[right + 1] >= heights[i]) {
                 right++;
             }
-
             maxArea = Math.max(maxArea, (right - left + 1) * heights[i]);
         }
         return maxArea;
