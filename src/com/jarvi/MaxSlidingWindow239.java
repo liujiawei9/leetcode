@@ -118,15 +118,15 @@ public class MaxSlidingWindow239 {
      * 找出数组指定范围内最大值所在的索引
      */
     public int getMaxIndex(int[] nums, int start, int end) {
-        int index = start;
-        int val = nums[start];
+        int maxIndex = start;
+        int maxValue = nums[start];
         for (int i = start + 1; i <= end; i++) {
-            if (val <= nums[i]) {
-                val = nums[i];
-                index = i;
+            if (maxValue <= nums[i]) {
+                maxValue = nums[i];
+                maxIndex = i;
             }
         }
-        return index;
+        return maxIndex;
     }
 
 }
