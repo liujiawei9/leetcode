@@ -41,15 +41,16 @@ public class GenerateParentheses22 {
     }
 
     private static void dfs(String s, int left, int right, int n, List<String> results) {
-        if (left == n && right == n) {
+        if (s.length() == 2 * n)  {
             results.add(s);
             return;
         }
-
-        if (left < right) return;
-
-        if (left < n) dfs(s + "(", left + 1, right, n, results);
-        if (right < n) dfs(s + ")", left, right + 1, n, results);
+        if (left < n) {
+            dfs(s + "(", left + 1, right, n, results);
+        }
+        if (right < left) {
+            dfs(s + ")", left, right + 1, n, results);
+        }
     }
 
     /**
